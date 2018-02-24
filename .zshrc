@@ -103,3 +103,5 @@ eval $(thefuck --alias)
 eval $(thefuck --alias FUCK)
 
 eval `dircolors ~/.dir_colors/dircolors`
+
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
