@@ -1,8 +1,8 @@
 # If you come from bash you might have to change your $PATH.
-  export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/zsaladin/.oh-my-zsh
+export ZSH=/Users/zsaladin/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -60,6 +60,8 @@ ZSH_THEME="agnoster"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  zsh-syntax-highlighting
+  zsh-dircolors-solarized
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -95,13 +97,13 @@ source $ZSH/oh-my-zsh.sh
 
 DEFAULT_USER=$USER
 prompt_dir() {
-    prompt_segment blue black '%c'
+  prompt_segment blue black '%c'
 }
 
 eval $(thefuck --alias)
 # You can use whatever you want as an alias, like for Mondays:
 eval $(thefuck --alias FUCK)
+export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
 
-eval `dircolors ~/.dir_colors/dircolors`
+export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
