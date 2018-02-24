@@ -16,6 +16,7 @@ nnoremap <F5> :NERDTreeToggle<CR>
 set encoding=utf-8
 set nu
 set clipboard=unnamed
+set backspace=indent,eol,start
 
 au BufNewFile,BufRead *.py
     \ set tabstop=4 |
@@ -46,7 +47,7 @@ Plugin 'jnurmine/Zenburn'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'klen/python-mode'
+Plugin 'Python-mode-klen'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -58,11 +59,10 @@ let g:airline_left_sep = ''
 
 let python_highlight_all=1
 
-set t_Co=256
 syntax on
-let g:solarized_termcolors = 256
-let g:solarized_visibility = "normal"
-let g:solarized_contrast = "normal"
 set background=dark
 colorscheme solarized
 
+let g:pymode_folding = 0
+let g:pymode_virtualenv = 1
+let g:pymode_python = 'python3'
