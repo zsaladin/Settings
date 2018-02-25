@@ -1,13 +1,14 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+  export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/zsaladin/.oh-my-zsh
+  export ZSH=/home/zsaladin/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
+#ZSH_THEME="agnoster"
+ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -60,8 +61,6 @@ ZSH_THEME="agnoster"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  zsh-syntax-highlighting
-  zsh-dircolors-solarized
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -96,14 +95,29 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 DEFAULT_USER=$USER
+
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
+POWERLEVEL9K_SHORTEN_STRATEGY=truncate_folders
+POWERLEVEL9K_SHORTEN_DELIMITER=""
+
+# Backup original prompt_dir function to _prompt_dir
+eval "`declare -f prompt_dir | sed '1s/.*/_&/'`"
 prompt_dir() {
-  prompt_segment blue black '%c'
+  # Never omit first character
+  POWERLEVEL9K_DIR_OMIT_FIRST_CHARACTER=false
+  # Except if current directory is longer than one character
+  local currentDirectory=$(print -P "%~")
+  [[ ${#currentDirectory} -gt 1 ]] && POWERLEVEL9K_DIR_OMIT_FIRST_CHARACTER=true
+
+  # Call original prompt_dir function
+  _prompt_dir "${1}" "${2}"
 }
+
 
 eval $(thefuck --alias)
 # You can use whatever you want as an alias, like for Mondays:
 eval $(thefuck --alias FUCK)
-export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
 
-export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
+eval `dircolors ~/.dir_colors/dircolors`
 
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
