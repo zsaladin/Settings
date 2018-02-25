@@ -61,6 +61,7 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -96,23 +97,13 @@ source $ZSH/oh-my-zsh.sh
 
 DEFAULT_USER=$USER
 
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
-POWERLEVEL9K_SHORTEN_STRATEGY=truncate_folders
-POWERLEVEL9K_SHORTEN_DELIMITER=""
-
-# Backup original prompt_dir function to _prompt_dir
-eval "`declare -f prompt_dir | sed '1s/.*/_&/'`"
-prompt_dir() {
-  # Never omit first character
-  POWERLEVEL9K_DIR_OMIT_FIRST_CHARACTER=false
-  # Except if current directory is longer than one character
-  local currentDirectory=$(print -P "%~")
-  [[ ${#currentDirectory} -gt 1 ]] && POWERLEVEL9K_DIR_OMIT_FIRST_CHARACTER=true
-
-  # Call original prompt_dir function
-  _prompt_dir "${1}" "${2}"
-}
-
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir virtualenv vcs vi_mode)
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
+POWERLEVEL9K_VIRTUALENV_BACKGROUND='028'
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
+POWERLEVEL9K_VI_INSERT_MODE_STRING="INSERT"
+POWERLEVEL9K_VI_COMMAND_MODE_STRING="NORMAL"
 
 eval $(thefuck --alias)
 # You can use whatever you want as an alias, like for Mondays:
@@ -121,3 +112,4 @@ eval $(thefuck --alias FUCK)
 eval `dircolors ~/.dir_colors/dircolors`
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
