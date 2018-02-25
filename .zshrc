@@ -103,7 +103,6 @@ prompt_dir() {
 eval $(thefuck --alias)
 # You can use whatever you want as an alias, like for Mondays:
 eval $(thefuck --alias FUCK)
-export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
 
 export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 
