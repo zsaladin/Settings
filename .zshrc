@@ -2,12 +2,12 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/zsaladin/.oh-my-zsh
+export ZSH=/Users/theloop/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
+ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -60,6 +60,7 @@ ZSH_THEME="agnoster"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  vi-mode
   zsh-syntax-highlighting
   zsh-dircolors-solarized
 )
@@ -96,13 +97,17 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 DEFAULT_USER=$USER
-prompt_dir() {
-  prompt_segment blue black '%c'
-}
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs virtualenv vi_mode)
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
+POWERLEVEL9K_VIRTUALENV_BACKGROUND='028'
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
+POWERLEVEL9K_VI_INSERT_MODE_STRING="INSERT"
+POWERLEVEL9K_VI_COMMAND_MODE_STRING="NORMAL"
 
 eval $(thefuck --alias)
 # You can use whatever you want as an alias, like for Mondays:
 eval $(thefuck --alias FUCK)
 
 export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
-

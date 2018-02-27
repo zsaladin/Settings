@@ -18,21 +18,6 @@ set nu
 set clipboard=unnamed
 set backspace=indent,eol,start
 
-au BufNewFile,BufRead *.py
-    \ set tabstop=4 |
-    \ set softtabstop=4 |
-    \ set shiftwidth=4 |
-    \ set textwidth=79 |
-    \ set expandtab |
-    \ set autoindent |
-    \ set fileformat=unix
-
-highlight BadWhitespace ctermbg=red guibg=darkred
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-
-let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -47,7 +32,7 @@ Plugin 'jnurmine/Zenburn'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'Python-mode-klen'
+Plugin 'klen/python-mode'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -61,9 +46,27 @@ let python_highlight_all=1
 
 syntax on
 set background=dark
+let g:solarized_termtrans = 1
 colorscheme solarized
 
 let g:pymode_folding = 0
-let g:pymode_virtualenv = 1
-let g:pymode_python = 'python3'
+
+" Ctrl-Space for completions. Heck Yeah!
+inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
+            \ "\<lt>C-n>" :
+            \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
+            \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
+            \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
+imap <C-@> <C-Space>
+
+" tab
+inoremap <S-Tab> <C-d>
+vmap <Tab> >gv
+vmap <S-Tab> <gv
+
+" Pymode
+let g:pymode_rope_complete_on_dot = 0
+let g:pymode_rope_autoimport_import_after_complete = 0
+let g:pymode_rope_autoimport = 0
+let g:pymode_rope = 1
 
