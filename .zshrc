@@ -1,14 +1,20 @@
+export LANG=en_US.UTF-8
+export TERM="xterm-256color"
 # If you come from bash you might have to change your $PATH.
-  export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$PATH:/usr/local/sbin
+export PATH=$PATH:/usr/local/opt/go/libexec/bin
+export PATH=$PATH:$HOME/go/bin
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/zsaladin/.oh-my-zsh
+export ZSH=/Users/theloop/.oh-my-zsh
+
+export GOPATH=$HOME/go
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-#ZSH_THEME="agnoster"
-ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME=spaceship
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -61,7 +67,8 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  vi-mode
+  zsh-syntax-highlighting
+  zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -97,19 +104,29 @@ source $ZSH/oh-my-zsh.sh
 
 DEFAULT_USER=$USER
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir virtualenv vcs vi_mode)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs virtualenv vi_mode)
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
 POWERLEVEL9K_VIRTUALENV_BACKGROUND='028'
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
-POWERLEVEL9K_VI_INSERT_MODE_STRING="INSERT"
-POWERLEVEL9K_VI_COMMAND_MODE_STRING="NORMAL"
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
+POWERLEVEL9K_VI_INSERT_MODE_STRING="INS"
+POWERLEVEL9K_VI_COMMAND_MODE_STRING="NOR"
+POWERLEVEL9K_ROOT_ICON=$'\uF09C'
+POWERLEVEL9K_TIME_ICON=$'\uF017'
 
 eval $(thefuck --alias)
 # You can use whatever you want as an alias, like for Mondays:
 eval $(thefuck --alias FUCK)
 
-eval `dircolors ~/.dir_colors/dircolors`
+export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# python virtualenv settings
+export WORKON_HOME=~/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON="$(which python3)"  # Usage of python3
+source /usr/local/bin/virtualenvwrapper.sh
 
+eval "$(pyenv init -)"
+source /usr/local/opt/autoenv/activate.sh
+export PATH="/usr/local/opt/openssl/bin:$PATH"
+export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
+export PKG_CONFIG_PATH="/usr/local/opt/openssl/lib/pkgconfig:$PKG_CONFIG_PATH"
